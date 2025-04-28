@@ -151,11 +151,14 @@ def get_random_fun_fact() -> str:
     return random.choice(facts)
 
 
+## If the user asks for a remotely running server, sse, or similar, use `mcp.run(transport="sse")` below.
+## Otherwise, use `mcp.run(transport="stdio")`
 ## DO NOT change anything below this line unless specifically asked to do so.
 # Run the server when executed directly
 if __name__ == "__main__":
     try:
         mcp.run(transport="stdio")
+        # mcp.run(transport="sse")
     except Exception as e:
         print(f"Error running server: {e}")
         import traceback
@@ -170,7 +173,7 @@ This guide is designed to help AI models interpret user requirements and create 
 
 ## QUICK MCP OVERVIEW
 
-MCP servers define capabilities for AI agent systems to interact with tools, resources, and prompts.
+MCP servers are Python programs that define capabilities for AI agent systems to interact with tools, resources, and prompts.
 Unless specifically requesting resources and prompts by name or asking for functionality specific to resources and prompts, the user most likely only wants tools in their server.
 
 1. **Tools**: Functions AI can call to perform actions
@@ -206,8 +209,10 @@ When a user describes what they want:
 
 ## IMPORTANT DIRECTIONS
 
-- Write only the smallest number of tools, resources, and prompts necessary to satisfy the user's request
-- Prefer tools instead of resources and prompts
+- Write only the smallest number of tools, resources, and prompts necessary to satisfy the user's request.
+- Prefer tools instead of resources and prompts.
+- MCP servers run inside a parent application in `stdio` mode. Remotely running servers can be created by using `sse` mode.
+- Do NOT write MCP servers in languages other than Python.
 
 # INSTRUCTIONS FOR USERS
 
