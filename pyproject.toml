@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Make_MCP"
+version = "1.0.0"
+description = "An MCP server for making MCP servers"
+authors = [
+    { name="Rory Butler" },
+]
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "mcp",
+]
+
+[project.scripts]
+make_mcp = "make_mcp.__main__:main"
+
+[tool.setuptools]
+packages = ["make_mcp"]
+
+[tool.setuptools.package-data]
+make_mcp = ["*.md"]

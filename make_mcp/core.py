@@ -9,11 +9,9 @@
 MCP Server for Making MCP Servers
 """
 
-import json
-import random
 from pathlib import Path
 
-from mcp.server.fastmcp import Context, FastMCP
+from mcp.server.fastmcp import FastMCP
 
 
 # ===== INITIALIZATION =====
@@ -21,6 +19,7 @@ from mcp.server.fastmcp import Context, FastMCP
 mcp = FastMCP("MakeMCP")
 
 DOCS_FILE = Path(__file__).parent / "docs.md"
+
 
 # ===== RESOURCES =====
 
@@ -31,8 +30,22 @@ def make_mcp() -> str:
     with open(DOCS_FILE, "r") as f:
         return f.read()
 
-# Run the server when executed directly
-if __name__ == "__main__":
+
+# ===== TOOLS =====
+
+@mcp.tool()
+def how_to_make_mcp() -> str:
+    """This tool returns instructions on how to build MCP servers.
+
+    You should use this tool if the user asks you to make an MCP server,
+    but did not provide general information on MCP servers. The instructions
+    include an example server and a quick overview of MCP terms like tools,
+    resources, and prompts."""
+    with open(DOCS_FILE, "r") as f:
+        return f.read()
+
+
+def main():
     try:
         mcp.run(transport="stdio")
     except Exception as e:
@@ -41,3 +54,7 @@ if __name__ == "__main__":
         traceback.print_exc()
         import sys
         sys.exit(1)
+
+# Run the server when executed directly
+if __name__ == '__main__':
+    main()
